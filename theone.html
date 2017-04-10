@@ -1,8 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta char="UTF-8"/>
+	<meta charset="UTF-8"/>
 	<style type="text/css">
+		@keyframes black{
+			0%   {background: black;}
+			20%  {background: white;}
+			40%  {background: black;}
+			80%	 {background: white;}
+			100% {background: black;}
+		}
+		@-moz-keyframes black /* Firefox */{
+			0%   {background: black;}
+			20%  {background: white;}
+			40%  {background: black;}
+			80% {background:  white;}
+			100% {background: black;}
+		}
+		@-webkit-keyframes black /* Safari 和 Chrome */{
+			0%   {background: black;}
+			20%  {background: white;}
+			40%  {background: black;}
+			80% {background:  white;}
+			100% {background: black;}
+		}
+		@-o-keyframes black/* Opera */{
+			0%   {background: black;}
+			20%  {background: white;}
+			40%  {background: black;}
+			80% {background:  white;}
+			100% {background: black;}
+		}
+		@keyframes white{
+			0%   {background: white;}
+			20%  {background: black;}
+			40%  {background: white;}
+			80%	 {background: black;}
+			100% {background: white;}
+		}
+		@-moz-keyframes white /* Firefox */{
+			0%   {background: white;}
+			20%  {background: black;}
+			40%  {background: white;}
+			80% {background:  black;}
+			100% {background: white;}
+		}
+		@-webkit-keyframes white /* Safari 和 Chrome */{
+			0%   {background: white;}
+			20%  {background: black;}
+			40%  {background: white;}
+			80% {background:  black;}
+			100% {background: white;}
+		}
+		@-o-keyframes white/* Opera */{
+			0%   {background: white;}
+			20%  {background: black;}
+			40%  {background: white;}
+			80% {background:  black;}
+			100% {background: white;}
+		}
 		*{
 			border:0;
 			margin:0;
@@ -16,8 +72,11 @@
 			height:100%;
 			display:-webkit-flex;
 			display:flex;
+			display:-moz-flex;
+			display:-o-flex;
 			justify-content:center;
 			align-items:center;
+			flex-direction:column
 		}
 		#cheese{
 			display:flex;
@@ -26,36 +85,83 @@
 			height:300px;	
 			flex-wrap: wrap;
 		}
-		#cheese>div{
+		.button{
+			width:300px;
+			height:50px;
+		}
+		input{
+			margin-top:50px;
+			margin-left:20px;
+			margin-right:20px;
+			width:100px;
+			height:50px;
+			font-size:20px;
+		}
+		.black{
 			border-radius:5%;
 			width:96px;
 			height:97px;
 			border:2px solid black;
 			display:flex;
 			display:-webkit-flex;
+			display:-moz-flex;
+			display:-o-flex;
 			justify-content:center;
 			align-items:center;
+			animation: black 80s;
+			-moz-animation: black 80s;	/* Firefox */
+			-webkit-animation: black 80s;	/* Safari 和 Chrome */
+			-o-animation: black 80s;	/* Opera */
+			animation-iteration-count:infinite;
+			-moz-animation-iteration-count:infinite;
+			-webkit-animation-iteration-count:infinite;
+			-o-animation-iteration-count:infinite;
+		}
+		.white{
+			border-radius:5%;
+			width:96px;
+			height:97px;
+			border:2px solid black;
+			display:flex;
+			display:-webkit-flex;
+			display:-moz-flex;
+			display:-o-flex;
+			justify-content:center;
+			align-items:center;
+			animation: white 80s;
+			-moz-animation: white 80s;	/* Firefox */
+			-webkit-animation: white 80s;	/* Safari 和 Chrome */
+			-o-animation: white 80s;	/* Opera */
+			animation-iteration-count:infinite;
+			-moz-animation-iteration-count:infinite;
+			-webkit-animation-iteration-count:infinite;
+			-o-animation-iteration-count:infinite;
 		}
 		#cheese>div>div{
 			border-radius:50%;
 			border:2px solid black;
 			width:80px;
 			height:80px;
+			background-color:white;
 		}
 	</style>
 	<script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 </head>
 <body>
 	<div id="cheese">
-		<div><div></div></div>
-		<div><div></div></div>
-		<div><div></div></div>
-		<div><div></div></div>
-		<div><div></div></div>
-		<div><div></div></div>
-		<div><div></div></div>
-		<div><div></div></div>
-		<div><div></div></div>
+		<div class="black"><div></div></div>
+		<div class="white"><div></div></div>
+		<div class="black"><div></div></div>
+		<div class="white"><div></div></div>
+		<div class="black"><div></div></div>
+		<div class="white"><div></div></div>
+		<div class="black"><div></div></div>
+		<div class="white"><div></div></div>
+		<div class="black"><div></div></div>
+	</div>
+	<div id="button">
+		<input id="set" type="button" value="显现"></button>
+		<input id="start" type="button" value="开始"></button>
 	</div>
 	<script>
 		
