@@ -97,6 +97,7 @@
 			width:100px;
 			height:50px;
 			font-size:20px;
+			border-radius:10%;
 		}
 		.black{
 			border-radius:5%;
@@ -139,30 +140,39 @@
 			-o-animation-iteration-count:infinite;
 		}
 		#cheese>div>div{
+			display:flex;
+			display:-webkit-flex;
+			display:-moz-flex;
+			display:-o-flex;
+			justify-content:center;
+			align-items:center;
 			border-radius:50%;
 			border:2px solid black;
 			width:80px;
 			height:80px;
 			background-color:white;
 		}
+		#cheese p{
+			font-size:30px;
+		}
 	</style>
-	<script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 </head>
 <body>
 	<div id="cheese">
-		<div class="black"><div></div></div>
-		<div class="white"><div></div></div>
-		<div class="black"><div></div></div>
-		<div class="white"><div></div></div>
-		<div class="black"><div></div></div>
-		<div class="white"><div></div></div>
-		<div class="black"><div></div></div>
-		<div class="white"><div></div></div>
-		<div class="black"><div></div></div>
+		<div class="black"><div><p>0</p></div></div>
+		<div class="white"><div><p>1</p></div></div>
+		<div class="black"><div><p>2</p></div></div>
+		<div class="white"><div><p>3</p></div></div>
+		<div class="black"><div><p>4</p></div></div>
+		<div class="white"><div><p>5</p></div></div>
+		<div class="black"><div><p>6</p></div></div>
+		<div class="white"><div><p>7</p></div></div>
+		<div class="black"><div><p>8</p></div></div>
 	</div>
 	<div id="button">
-		<input id="set" type="button" value="显现"></button>
-		<input id="start" type="button" value="开始"></button>
+		<input id="before" type="button" value="上一步"></input>
+		<input id="after" type="button" value="下一步"></input>
 	</div>
 	<script>
 	//A*算法部分
@@ -515,25 +525,35 @@
 						document.write("+");
 					}
 				}
-				document.write("<br>");
+				document.write("<br />");
 			}
-		}
-	}
-	function run_matrix() {
-		let resultList = search1();
-		console.log(resultList);
-		for (let node of resultList){
-			for (let temp_list of node.matrix) {
-				// document.write(temp_list.join(' \n'));
-				document.write(JSON.stringify(temp_list));
-				document.write("<br>");
-			}
-			document.write("<br><hr><br>");
 		}
 	}
 	
 	//交互部分
-	
+	var cheese=[[0,1,4,2,5,6,8,3,7],[1,3,4,6,5,7,8,0,2],[0,4,3,5,6,7,2,8,1]];
+	var i=0;
+	$("#before").click(function(){
+		if(i==0){
+			alert("不存在上一步!");
+			return;
+		}
+		i--;
+		for(var j=0;j<9;j++){
+			$('p').eq(j).html(cheese[i][j]);
+		}		
+	});
+	$("#after").click(function(){
+		if(i==2){
+			alert("不存在下一步!");
+			return;
+		}
+		i++;
+		for(var j=0;j<9;j++){
+			$('p').eq(j).html(cheese[i][j]);
+		}
+		
+	});
 	</script>
 </body>
 </html>
