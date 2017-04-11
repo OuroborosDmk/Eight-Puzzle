@@ -544,15 +544,14 @@
 		}		
 	});
 	$("#after").click(function(){
-		if(i==2){
+		if(i==3){
 			alert("不存在下一步!");
 			return;//验证步骤可忽略
 		}
-		i++;
 		for(var j=0;j<9;j++){
 			$('p').eq(j).html(cheese[i][j]);
 		}
-		
+		i++;
 	});
 	</script>
 </body>
