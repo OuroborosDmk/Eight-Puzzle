@@ -15,21 +15,21 @@
 			0%   {background: black;}
 			20%  {background: white;}
 			40%  {background: black;}
-			80% {background:  white;}
+			80%  {background: white;}
 			100% {background: black;}
 		}
 		@-webkit-keyframes black /* Safari 和 Chrome */{
 			0%   {background: black;}
 			20%  {background: white;}
 			40%  {background: black;}
-			80% {background:  white;}
+			80%  {background: white;}
 			100% {background: black;}
 		}
 		@-o-keyframes black/* Opera */{
 			0%   {background: black;}
 			20%  {background: white;}
 			40%  {background: black;}
-			80% {background:  white;}
+			80%  {background: white;}
 			100% {background: black;}
 		}
 		@keyframes white{
@@ -43,21 +43,21 @@
 			0%   {background: white;}
 			20%  {background: black;}
 			40%  {background: white;}
-			80% {background:  black;}
+			80%  {background: black;}
 			100% {background: white;}
 		}
 		@-webkit-keyframes white /* Safari 和 Chrome */{
 			0%   {background: white;}
 			20%  {background: black;}
 			40%  {background: white;}
-			80% {background:  black;}
+			80%  {background: black;}
 			100% {background: white;}
 		}
 		@-o-keyframes white/* Opera */{
 			0%   {background: white;}
 			20%  {background: black;}
 			40%  {background: white;}
-			80% {background:  black;}
+			80%  {background: black;}
 			100% {background: white;}
 		}
 		*{
@@ -77,27 +77,47 @@
 			display:-o-flex;
 			justify-content:center;
 			align-items:center;
-			flex-direction:column
+			flex-direction:column;
 		}
 		#cheese{
 			display:flex;
 			display:-webkit-flex;
+			display:-moz-flex;
+			display:-o-flex;
 			width:300px;
 			height:300px;	
 			flex-wrap: wrap;
 		}
-		.button{
+		#button{ 
+			margin-top:30px;
 			width:300px;
 			height:50px;
 		}
-		input{
-			margin-top:50px;
+		#button input{
 			margin-left:20px;
 			margin-right:20px;
 			width:100px;
 			height:50px;
 			font-size:20px;
-			border-radius:10%;
+		}
+		#input{
+			display:flex;
+			display:-webkit-flex;
+			display:-moz-flex;
+			display:-o-flex;
+			flex-direction:column;
+			align-items:center;
+			margin-top:30px;
+			width:400px;
+			height:200px;
+		}
+		#input input{
+			margin-top:5px;
+			width:200px;
+			height:30px;
+			font-size:15px;
+			border:2px solid black;
+			border-radius:5px;
 		}
 		.black{
 			border-radius:5%;
@@ -158,6 +178,7 @@
 	</style>
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 </head>
+
 <body>
 	<div id="cheese">
 		<div class="black"><div><p></p></div></div>
@@ -169,6 +190,13 @@
 		<div class="black"><div><p></p></div></div>
 		<div class="white"><div><p></p></div></div>
 		<div class="black"><div><p></p></div></div>
+	</div>
+	<div id="input">
+		<p>请输入初始状态</p><input id="start" type="text"></input>
+		<input id="sinput" type="button" value="提交"></input>
+		<p>请输入终结状态</p><input id="end" type="text"></input>
+		<input id="einput" type="button" value="提交"></input>
+		<p><strong>(按顺序输入9个数中间不需要分隔符)</strong></p>
 	</div>
 	<div id="button">
 		<input id="before" type="button" value="上一步"></input>
@@ -197,7 +225,7 @@
 	let test = [
 			[1, 2, 3],
 			[4, 5, 6],
-			[7, 8, 0],//测试数据有问题，待处理
+			[7, 8, 0],
 		];
 	let goal = [
 			[3, 2, 1],
@@ -531,8 +559,10 @@
 	}
 	
 	//交互部分
-	var cheese=[[0,1,4,2,5,6,8,3,7],[1,3,4,6,5,7,8,0,2],[0,4,3,5,6,7,2,8,1]];//填上输出数组
+	var cheese=[[0,1,4,2,5,6,8,3,7],[1,3,4,6,5,7,8,0,2],[0,4,3,5,6,7,2,8,1]];
 	var i=0;
+	var startArray=new Array();
+	var endArray=new Array();
 	$("#before").click(function(){
 		if(i==0){
 			alert("不存在上一步!");
@@ -542,17 +572,45 @@
 		for(var j=0;j<9;j++){
 			$('p').eq(j).html(cheese[i][j]);
 		}		
-	});
+	});//上一步计算
 	$("#after").click(function(){
 		if(i==3){
 			alert("不存在下一步!");
-			return;//验证步骤可忽略
+			return;
 		}
 		for(var j=0;j<9;j++){
 			$('p').eq(j).html(cheese[i][j]);
 		}
 		i++;
-	});
+	});//下一步计算
+	function change(x){
+		var newArray=new Array();
+		newArray[0]=[x[0],x[1],x[2]];
+		newArray[1]=[x[3],x[4],x[5]];
+		newArray[2]=[x[6],x[7],x[8]];
+		
+		return newArray;
+	}//将1*9数组转化为3*3数组
+	document.getElementById("sinput").onclick=function(){
+		var input=document.getElementById("start").value;
+		var check=/^\d{9}$/;
+		if(check.test(input)==false){
+			alert("输入不符合！");
+			return;
+		}
+		startArray=input;
+		startArray=change(startArray);//开始状态最终输出
+	}//获取开始状态输入
+	document.getElementById("einput").onclick=function(){
+		var input=document.getElementById("end").value;
+		var check=/^\d{9}$/;
+		if(check.test(input)==false){
+			alert("输入不符合！");
+			return;
+		}
+		endArray=input;
+		endArray=change(endArray);//结束状态最终输出
+	}//获取结束状态输入
 	</script>
 </body>
 </html>
