@@ -160,15 +160,15 @@
 </head>
 <body>
 	<div id="cheese">
-		<div class="black"><div><p>0</p></div></div>
-		<div class="white"><div><p>1</p></div></div>
-		<div class="black"><div><p>2</p></div></div>
-		<div class="white"><div><p>3</p></div></div>
-		<div class="black"><div><p>4</p></div></div>
-		<div class="white"><div><p>5</p></div></div>
-		<div class="black"><div><p>6</p></div></div>
-		<div class="white"><div><p>7</p></div></div>
-		<div class="black"><div><p>8</p></div></div>
+		<div class="black"><div><p></p></div></div>
+		<div class="white"><div><p></p></div></div>
+		<div class="black"><div><p></p></div></div>
+		<div class="white"><div><p></p></div></div>
+		<div class="black"><div><p></p></div></div>
+		<div class="white"><div><p></p></div></div>
+		<div class="black"><div><p></p></div></div>
+		<div class="white"><div><p></p></div></div>
+		<div class="black"><div><p></p></div></div>
 	</div>
 	<div id="button">
 		<input id="before" type="button" value="上一步"></input>
@@ -197,7 +197,7 @@
 	let test = [
 			[1, 2, 3],
 			[4, 5, 6],
-			[7, 8, 0],
+			[7, 8, 0],//测试数据有问题，待处理
 		];
 	let goal = [
 			[3, 2, 1],
@@ -531,7 +531,7 @@
 	}
 	
 	//交互部分
-	var cheese=[[0,1,4,2,5,6,8,3,7],[1,3,4,6,5,7,8,0,2],[0,4,3,5,6,7,2,8,1]];
+	var cheese=[[0,1,4,2,5,6,8,3,7],[1,3,4,6,5,7,8,0,2],[0,4,3,5,6,7,2,8,1]];//填上输出数组
 	var i=0;
 	$("#before").click(function(){
 		if(i==0){
@@ -546,7 +546,7 @@
 	$("#after").click(function(){
 		if(i==2){
 			alert("不存在下一步!");
-			return;
+			return;//验证步骤可忽略
 		}
 		i++;
 		for(var j=0;j<9;j++){
